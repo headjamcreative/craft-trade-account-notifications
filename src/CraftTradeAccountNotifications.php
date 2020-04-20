@@ -151,8 +151,10 @@ class CraftTradeAccountNotifications extends Plugin
    */
   private function sendUserNotification($userId) {
     $user = \craft\elements\User::find()->id($userId)->one();
-    if ($user) {
+    if ($user && $user->getFieldValue('notifyOnAcceptance')) {
       CraftTradeAccountNotifications::sendMail('_emails/trade-account-approved.html', 'Trade Account Approved', $user->email);
+      $user->setFieldValue('notifyOnAcceptance', false);
+      Craft::$app->elements->saveElement($user);
     }
   }
 
