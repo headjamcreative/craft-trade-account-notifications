@@ -1,12 +1,10 @@
-# Craft Trade Account Notifications plugin for Craft CMS 3.x
+# Craft Trade Account Notification plugin for Craft CMS 3.x
 
-Send notifications to the client and user on changing user group.
-
-![Screenshot](resources/img/plugin-logo.png)
+Sends email notifications to user and other nominated email addresses when a user chagnes group type.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 3.4.0 or later.
 
 ## Installation
 
@@ -18,26 +16,8 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require https://github.com/headjamcreative/craft-trade-account-notifications
+        composer require headjam/craft-trade-account-notifications
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Craft Trade Account Notifications.
-
-## Craft Trade Account Notifications Overview
-
--Insert text here-
-
-## Configuring Craft Trade Account Notifications
-
--Insert text here-
-
-## Using Craft Trade Account Notifications
-
--Insert text here-
-
-## Craft Trade Account Notifications Roadmap
-
-Some things to do, and ideas for potential features:
-
-* Release it
 
 Brought to you by [Ben Norman](https://www.headjam.com.au)
