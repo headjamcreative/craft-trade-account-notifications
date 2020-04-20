@@ -1,0 +1,41 @@
+{
+    "name": "headjam/craft-trade-account-notifications",
+    "description": "Send notifications to the client and user on changing user group.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft trade account notifications"
+    ],
+    "support": {
+        "docs": "https://github.com/https://github.com/headjamcreative/craft-trade-account-notifications/blob/master/README.md",
+        "issues": "https://github.com/https://github.com/headjamcreative/craft-trade-account-notifications/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ben Norman",
+            "homepage": "https://www.headjam.com.au"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "headjam\\crafttradeaccountnotifications\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Craft Trade Account Notifications",
+        "handle": "craft-trade-account-notifications",
+        "developer": "Ben Norman",
+        "developerUrl": "https://www.headjam.com.au",
+        "documentationUrl": "https://github.com/https://github.com/headjamcreative/craft-trade-account-notifications/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/https://github.com/headjamcreative/craft-trade-account-notifications/master/CHANGELOG.md",
+        "class": "headjam\\crafttradeaccountnotifications\\CraftTradeAccountNotifications"
+    }
+}
