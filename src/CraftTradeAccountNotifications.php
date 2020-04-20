@@ -107,7 +107,7 @@ class CraftTradeAccountNotifications extends Plugin
       Users::class,
       Users::EVENT_AFTER_ACTIVATE_USER,
       function (UserEvent $e) {
-        CraftTradeAccountNotifications::log(json_encode($e));
+        CraftTradeAccountNotifications::checkForTradeAccountApplication($e->user);
       }
     );
 
@@ -128,11 +128,13 @@ class CraftTradeAccountNotifications extends Plugin
   // =========================================================================
   /** 
    * Send an email.
-   * @param String $html - The html to send.
+   * @param String $template - The template to render.
    * @param String $subject - The email subject.
    * @param String $sendTo - The email address to send it to.
    */
-  private function sendMail(string $html, string $subject, string $sendTo) {
+  private function sendMail(string $template, string $subject, string $sendTo, array $variables=[]) {
+    Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_SITE);
+    $html = Craft::$app->getView()->renderTemplate($template, $variables);
     if ($html && $subject && $sendTo) {
         return Craft::$app
             ->getMailer()
@@ -150,9 +152,25 @@ class CraftTradeAccountNotifications extends Plugin
   private function sendUserNotification($userId) {
     $user = \craft\elements\User::find()->id($userId)->one();
     if ($user) {
-      Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_SITE);
-      $html = Craft::$app->getView()->renderTemplate('_emails/trade-account-approved.html');
-      CraftTradeAccountNotifications::sendMail($html, 'Trade Account Approved', $user->email);
+      CraftTradeAccountNotifications::sendMail('_emails/trade-account-approved.html', 'Trade Account Approved', $user->email);
+    }
+  }
+
+  /** 
+   * Check the if the user has applied for a trade account and, if so, send a notification to the client.
+   * @param Object $user - The user applying for a trade account.
+   */
+  private function checkForTradeAccountApplication($user) {
+    $applicationCompanyName = $user->getFieldValue('applicationCompanyName');
+    $applicationAbn = $user->getFieldValue('applicationAbn');
+    if ($applicationCompanyName && $this->tradeAccountNotificationEmail) {
+      $variables = array(
+        'company' => $applicationCompanyName,
+        'abn' => $applicationAbn,
+        'name' => $user->firstName . ' ' . $user->lastName,
+        'email' => $user->email,
+      );
+      CraftTradeAccountNotifications::sendMail('_emails/trade-account-application.html', 'Trade Account Application', $this->tradeAccountNotificationEmail, $variables);
     }
   }
 }
